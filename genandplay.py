@@ -2,6 +2,18 @@ import numpy as np
 from scipy.io.wavfile import write
 import streamlit as st
 
+try:
+    import numpy
+except ImportError:
+    import os
+    os.system('pip install numpy')
+
+try:
+    import scipy
+except ImportError:
+    import os
+    os.system('pip install scipy')
+
 # Function to generate sine wave
 def generate_sine_wave(freq, duration, sample_rate=44100, amplitude=8000):
     x = np.linspace(0, duration, int(sample_rate * duration), False)
