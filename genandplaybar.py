@@ -11,11 +11,15 @@ def generate_sine_wave(freq, duration, sample_rate=44100, amplitude=8000):
     return y.astype(np.int16)  # Convert to 16-bit data
 
 def app():
-    st.title('Wave Generator')
+    st.title('Ibrahim Wave Generator')
 
-    freq = st.number_input('Frequency (Hz)', min_value=0, max_value=300000, value=100,step=1)
+    freqH= st.slider('Frequency (Hz)', min_value=0.0, max_value=1000.0, value=100.0)
 
-    duration = st.number_input('Duration (s)', min_value=1, max_value=600, value=10,step=1)
+    freqK= st.slider('Frequency (KHz)', min_value=0.0, max_value=70.0, value=0.0)
+    
+    freq = freqH+freqK*1000
+
+    duration = st.slider('Duration (s)', min_value=0.1, max_value=600.0, value=1.0)
 
     if st.button('Generate'):
         wave = generate_sine_wave(freq, duration)
@@ -24,3 +28,4 @@ def app():
 
 if __name__ == "__main__":
     app()
+#streamlit run --server.address 0.0.0.0 genandplay.py
